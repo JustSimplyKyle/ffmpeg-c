@@ -44,7 +44,7 @@ void convert_into_another(){
     cout << "Select a format to convert to(filename extensions).\n";
     string format;
     cin >> format;
-    string command = "ffmpeg -i " + file_name + " " + file_name.substr(file_name.find_last_of(".")+ 1) + "_converted." + format;
+    string command = "ffmpeg -i " + file_name + " " + file_name.substr(0, file_name.find_last_of(".")) + "_converted." + format + '\"';
     exec_print(command.c_str());
 }
 
@@ -61,11 +61,11 @@ void extract_audio(){
         cout << "Select a format to convert to(filename extensions).\n";
         string format;
         cin >> format;
-        string command = "ffmpeg -i " + file_name + " -map 0:a " + file_name.substr(file_name.find_last_of(".")+ 1) + "_converted." + format;
+        string command = "ffmpeg -i " + file_name + " -map 0:a " + file_name.substr(0, file_name.find_last_of(".")) + "_converted." + format + '\"';
         exec_print(command.c_str());
     }
     else{
-        string command = "ffmpeg -i " + file_name + " -map 0:a -c copy " + file_name.substr(0, file_name.find_last_of(".")) + "_audio.wav";
+        string command = "ffmpeg -i " + file_name + " -map 0:a -c copy " + file_name.substr(0, file_name.find_last_of(".")) + "_audio.wav" + '\"';
         exec_print(command.c_str());
     }
 }
@@ -83,11 +83,11 @@ void extract_video(){
         cout << "Select a format to convert to(filename extensions).\n";
         string format;
         cin >> format;
-        string command = "ffmpeg -i " + file_name + " -map 0:v " + file_name.substr(file_name.find_last_of(".")+ 1) + "_extracted." + format;
+        string command = "ffmpeg -i " + file_name + " -map 0:v " + file_name.substr(file_name.find_last_of(".")+ 1) + "_extracted." + format + '\"';
         exec_print(command.c_str());
     }
     else{
-        string command = "ffmpeg -i " + file_name + " -map 0:v -c copy " + file_name.substr(0, file_name.find_last_of(".")) + "_extracted." + file_name.substr(file_name.find_last_of(".")+ 1);
+        string command = "ffmpeg -i " + file_name + " -map 0:v -c copy " + file_name.substr(0, file_name.find_last_of(".")) + "_extracted." + file_name.substr(file_name.find_last_of(".")+ 1) ;
         exec_print(command.c_str());
     }
 }
@@ -119,7 +119,7 @@ void cut_video_d(){
     cout << "Select an end time(00:00:25) by duration.\n";
     string end_time;
     cin >> end_time;
-    string command = "ffmpeg -ss " + start_time + " -i " + file_name + " -t " + end_time + " -c copy " + file_name.substr(0, file_name.find_last_of(".")) + "_cut." + file_name.substr(file_name.find_last_of(".")+ 1);
+    string command = "ffmpeg -ss " + start_time + " -i " + file_name + " -t " + end_time + " -c copy " + file_name.substr(0, file_name.find_last_of(".")) + "_cut." + file_name.substr(file_name.find_last_of(".")+ 1) ;
     exec_print(command.c_str());
 }
 int main(){
